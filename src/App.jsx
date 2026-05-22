@@ -104,7 +104,7 @@ function App() {
       
       <MovingVectorBackground theme={theme} />
 
-      {/* Theme Toggle Button */}
+      {/* Standalone Theme Toggle Button */}
       <button 
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
         style={{
@@ -128,8 +128,57 @@ function App() {
         {isDark ? <MoonIcon /> : <SunIcon />}
       </button>
 
+      {/* Floating Top Navbar */}
+      <nav style={{
+        position: 'fixed',
+        top: '2rem',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: 'auto',
+        padding: '1rem 3rem',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        background: isDark ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.6)',
+        backdropFilter: 'blur(30px)',
+        WebkitBackdropFilter: 'blur(30px)',
+        borderRadius: '100px',
+        border: isDark ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)',
+        boxShadow: isDark ? '0 10px 40px rgba(0,0,0,0.5)' : '0 10px 40px rgba(0,0,0,0.05)',
+        zIndex: 1000,
+        transition: 'background 0.5s ease, border 0.5s ease'
+      }}>
+        {/* Navigation Links */}
+        <div style={{ display: 'flex', gap: '3rem' }}>
+          {[
+            { name: 'About', id: '#about' },
+            { name: 'Projects', id: '#projects' },
+            { name: 'Contact', id: '#contact' }
+          ].map((item, i) => (
+            <a 
+              key={i} 
+              href={item.id} 
+              style={{
+                color: mutedColor,
+                textDecoration: 'none',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                transition: 'color 0.3s ease',
+              }}
+              onMouseOver={(e) => e.target.style.color = hoverColor}
+              onMouseOut={(e) => e.target.style.color = mutedColor}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+      </nav>
+
       {/* Sections Container */}
-      <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '20vh', padding: '0 10vw 25vh 10vw' }}>
+      <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '20vh', padding: '0 10vw 0 10vw' }}>
         
         {/* Hero Section */}
         <section style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -264,7 +313,7 @@ function App() {
           justifyContent: 'center',
           overflow: 'hidden',
           position: 'relative',
-          paddingBottom: '5vh'
+          paddingBottom: '0'
         }}>
           <h1 style={{
             fontSize: '13vw',
@@ -283,55 +332,18 @@ function App() {
         </div>
       </div>
 
-      {/* Frosted Glass Footer */}
+      {/* Footer */}
       <footer style={{
-        position: 'fixed',
-        bottom: '2rem',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: 'calc(100% - 4rem)',
-        maxWidth: '800px',
-        padding: '1.2rem 3rem',
+        width: '100%',
+        padding: '2rem 4rem',
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         boxSizing: 'border-box',
-        background: isDark ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.5)',
-        backdropFilter: 'blur(50px)',
-        WebkitBackdropFilter: 'blur(50px)',
-        borderRadius: '100px',
-        border: isDark ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)',
-        boxShadow: isDark ? '0 10px 40px rgba(0,0,0,0.5)' : '0 10px 40px rgba(0,0,0,0.05)',
+        gap: '4rem',
         zIndex: 1000,
-        transition: 'background 0.5s ease, border 0.5s ease'
+        position: 'relative'
       }}>
-        
-        {/* Navigation Links */}
-        <div style={{ display: 'flex', gap: '2.5rem' }}>
-          {[
-            { name: 'About me', id: '#about' },
-            { name: 'Projects', id: '#projects' },
-            { name: 'Contact Me', id: '#contact' }
-          ].map((item, i) => (
-            <a 
-              key={i} 
-              href={item.id} 
-              style={{
-                color: mutedColor,
-                textDecoration: 'none',
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                transition: 'color 0.3s ease',
-              }}
-              onMouseOver={(e) => e.target.style.color = hoverColor}
-              onMouseOut={(e) => e.target.style.color = mutedColor}
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
 
         {/* Social Icons */}
         <div style={{ display: 'flex', gap: '1.5rem' }}>

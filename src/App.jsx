@@ -503,7 +503,7 @@ function App() {
           {[
             { icon: <LinkedinIcon />, url: 'https://www.linkedin.com/in/sebastianantic/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bh3iQyIprRw2o8iY11vtDkg%3D%3D' },
             { icon: <GithubIcon />, url: 'https://github.com/SebastianAntic' },
-            { icon: <InstagramIcon />, url: 'https://www.instagram.com/sebastian_antic/' }
+            { icon: <InstagramIcon />, url: 'https://www.instagram.com/_thecanvass' }
           ].map((social, i) => (
             <a 
               key={i}

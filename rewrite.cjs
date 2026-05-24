@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+const fs = require('fs');
+const path = require('path');
+
+const appJsxContent = `import React, { useState } from 'react';
 import './App.css';
 
 const MovingVectorBackground = ({ theme }) => (
@@ -16,8 +19,8 @@ const MovingVectorBackground = ({ theme }) => (
     <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
       {[...Array(60)].map((_, i) => {
         const offset = i - 30;
-        const strokeOp = theme === 'dark' ? (0.01 + Math.abs(offset) * 0.015) : (0.02 + Math.abs(offset) * 0.02);
-        const strokeColor = theme === 'dark' ? `rgba(255,255,255,${strokeOp})` : `rgba(0,0,0,${strokeOp})`;
+        const strokeOp = theme === 'dark' ? (0.01 + Math.abs(offset) * 0.015) : (0.01 + Math.abs(offset) * 0.01);
+        const strokeColor = theme === 'dark' ? \`rgba(255,255,255,\${strokeOp})\` : \`rgba(0,0,0,\${strokeOp})\`;
         const strokeW = 1 + Math.random();
 
         const yStart = 500 + offset * 15 + Math.sin(i) * 50;
@@ -49,19 +52,19 @@ const MovingVectorBackground = ({ theme }) => (
             fill="none"
             stroke={strokeColor}
             strokeWidth={strokeW}
-            d={`M-100,${yStart} C${cp1x_1},${cp1y_1} ${cp2x_1},${cp2y_1} 1100,${yEnd}`}
+            d={\`M-100,\${yStart} C\${cp1x_1},\${cp1y_1} \${cp2x_1},\${cp2y_1} 1100,\${yEnd}\`}
           >
             <animate
               attributeName="d"
-              dur={`${15 + Math.abs(offset) * 0.4 + (i%5)}s`}
+              dur={\`\${15 + Math.abs(offset) * 0.4 + (i%5)}s\`}
               repeatCount="indefinite"
-              values={`
-                M-100,${yStart} C${cp1x_1},${cp1y_1} ${cp2x_1},${cp2y_1} 1100,${yEnd};
-                M-100,${yStart} C${cp1x_2},${cp1y_2} ${cp2x_2},${cp2y_2} 1100,${yEnd};
-                M-100,${yStart} C${cp1x_3},${cp1y_3} ${cp2x_3},${cp2y_3} 1100,${yEnd};
-                M-100,${yStart} C${cp1x_4},${cp1y_4} ${cp2x_4},${cp2y_4} 1100,${yEnd};
-                M-100,${yStart} C${cp1x_1},${cp1y_1} ${cp2x_1},${cp2y_1} 1100,${yEnd}
-              `}
+              values={\`
+                M-100,\${yStart} C\${cp1x_1},\${cp1y_1} \${cp2x_1},\${cp2y_1} 1100,\${yEnd};
+                M-100,\${yStart} C\${cp1x_2},\${cp1y_2} \${cp2x_2},\${cp2y_2} 1100,\${yEnd};
+                M-100,\${yStart} C\${cp1x_3},\${cp1y_3} \${cp2x_3},\${cp2y_3} 1100,\${yEnd};
+                M-100,\${yStart} C\${cp1x_4},\${cp1y_4} \${cp2x_4},\${cp2y_4} 1100,\${yEnd};
+                M-100,\${yStart} C\${cp1x_1},\${cp1y_1} \${cp2x_1},\${cp2y_1} 1100,\${yEnd}
+              \`}
             />
           </path>
         );
@@ -112,54 +115,11 @@ const InstagramIcon = () => (
   </svg>
 );
 
-const certificationsList = [
-  { title: "Talent Acquisition and Management", issuer: "NPTEL", date: "May 2026", id: "NOC26MG60S55020290504877565" },
-  { title: "Using MongoDB with Java", issuer: "MongoDB", date: "Sep 2025", id: "MDBxbtzesxbmj" },
-  { title: "Introduction to MongoDB (For Students)", issuer: "MongoDB", date: "Jan 2026", id: "MDBz1nalhgnty" },
-  { title: "Connecting to MongoDB in Java", issuer: "MongoDB", date: "Sep 2025", id: "MDBe6t1apqgwf" },
-  { title: "MongoDB CRUD Operations in Java", issuer: "MongoDB", date: "Sep 2025", id: "MDBblfq095nua" },
-  { title: "MongoDB Aggregation with Java", issuer: "MongoDB", date: "Sep 2025", id: "MDBmd5hzebujh" },
-  { title: "Getting Started with MongoDB Atlas", issuer: "MongoDB", date: "Jan 2026", id: "MDBd5efdrnrg2" },
-  { title: "MongoDB and the Document Model", issuer: "MongoDB", date: "Jan 2026", id: "MDBcqelsj4ae2" },
-  { title: "MongoDB CRUD Operations: Insert and Find Documents", issuer: "MongoDB", date: "Jan 2026", id: "MDBgm44izc9c2" },
-  { title: "MongoDB CRUD Operations: Replace and Delete Documents", issuer: "MongoDB", date: "Jan 2026", id: "MDBgp2bvnj461" },
-  { title: "MongoDB Aggregation", issuer: "MongoDB", date: "Jan 2026", id: "MDBclygnflb9u" },
-  { title: "MongoDB CRUD Operations: Modifying Query Results", issuer: "MongoDB", date: "Jan 2026", id: "MDBllr5t3d9qx" },
-  { title: "MongoDB Indexes", issuer: "MongoDB", date: "Jan 2026", id: "MDBo5o8842zuh" },
-  { title: "MongoDB Atlas Search", issuer: "MongoDB", date: "Jan 2026", id: "MDBc92assqyht" },
-  { title: "MongoDB Data Modeling Intro", issuer: "MongoDB", date: "Jan 2026", id: "MDBg3ktq24812" },
-  { title: "MongoDB Transactions", issuer: "MongoDB", date: "Jan 2026", id: "MDBj7cc3v6ic9" },
-  { title: "Advanced Wordpress Course for Professionals", issuer: "Udemy", date: "Jun 2023", id: "UC-347ea9a8-204e-4de9-bade-5d60f73a9414" },
-  { title: "Learn Python From Scratch", issuer: "Udemy", date: "Sep 2023", id: "UC-e69ca49b-aeb3-4dOd-af02-219aa4b5f877" },
-  { title: "Cybersecurity Awareness: Exposure to Security Risks", issuer: "Infosys Springboard", date: "Sep 2025" },
-  { title: "Computer Virus - Definition, Types, Spread and Prevention", issuer: "Udemy", date: "Jun 2023", id: "UC-8ce22ec9-2310-437e-97c9-337ceafbaced" },
-  { title: "The Ultimate Sleep Course | Sleep good & Cure Insomnia", issuer: "Udemy", date: "Jun 2023", id: "UC-a3d0a768-b8c9-4f5a-bc5e-26b09439009a" },
-  { title: "Cybersecurity Awareness: Key Security Terms & Concepts", issuer: "Infosys Springboard", date: "Sep 2025" },
-  { title: "Identity and Access Management IAM", issuer: "Infosys Springboard", date: "Aug 2025" },
-  { title: "Artificial Intelligence and Machine Learning Fundamentals", issuer: "Infosys Springboard", date: "Nov 2023" },
-  { title: "Fundamentals of Information Security", issuer: "Infosys Springboard", date: "Oct 2024" },
-  { title: "Viksit Bharat Young Leaders Dialogue (VBYLD) 2026", issuer: "Mera Yuva Bharat - MY Bharat", date: "Sep 2025" },
-  { title: "Hands-on Artificial Intelligence with TensorFlow", issuer: "Infosys Springboard", date: "Nov 2023" },
-  { title: "Build Your Best Cold Email Strategy!", issuer: "Udemy", date: "Jun 2023", id: "UC-eab1d866-01ef-468a-aacf-bda13c6b13e4" },
-  { title: "Candidate Experience in Industry 4.0", issuer: "Udemy", date: "Jul 2023", id: "UC-8317a428-fb3e-4da4-85d3-4f115a5b92ad" },
-  { title: "AWS Educate Getting Started with Databases", issuer: "Amazon Web Services (AWS)", date: "Sep 2025", id: "113af942-0987-4fb4-a374-da703b30d0df" },
-  { title: "AWS Educate Machine Learning Foundations", issuer: "Amazon Web Services (AWS)", date: "Sep 2025", id: "8703168a-34a1-4536-9630-bc1d7a8e0aa7" },
-  { title: "AWS Educate Getting Started with Cloud Ops", issuer: "Amazon Web Services (AWS)", date: "Sep 2025", id: "738da8c6-409f-46aa-8de9-d7c5ae43e89f" },
-  { title: "AWS Educate Getting Started with Serverless", issuer: "Amazon Web Services (AWS)", date: "Sep 2025", id: "4619-ecbe-463e-a48c-e560d584709c" },
-  { title: "AWS Educate Getting Started with Compute", issuer: "Amazon Web Services (AWS)", date: "Sep 2025", id: "c8f74b98-d39c-4633-b0a6-ed3d76526309" },
-  { title: "AWS Educate Getting Started with Security", issuer: "Amazon Web Services (AWS)", date: "Sep 2025", id: "61-d73e-487f-8af0-dbaa28b2bfe5" },
-  { title: "AWS Educate Getting Started with Networking", issuer: "Amazon Web Services (AWS)", date: "Sep 2025", id: "245a33fe-1ffd-4d1c-8cb5-819ef91b1920" },
-  { title: "AWS Educate Getting Started with Storage", issuer: "Amazon Web Services (AWS)", date: "Sep 2025", id: "92cb7dff-db6e-4a49-a92c-ac5f290afb18" },
-  { title: "AWS Educate Introduction to Cloud 101", issuer: "Amazon Web Services (AWS)", date: "Aug 2025", id: "392a0fba-e097-403c-ba0e-a7b3b06f6314" },
-  { title: "AWS Academy Graduate - AWS Academy Cloud Foundations", issuer: "Amazon Web Services (AWS)", date: "Aug 2025", id: "34c83bc6-caff-406e-888f-a8ac85b72565" },
-  { title: "Getting Started with Microsoft Excel", issuer: "Coursera Project Network", date: "Jun 2025", id: "G856B3QGUPLX" }
-];
-
 function App() {
   const [theme, setTheme] = useState('dark');
 
   const isDark = theme === 'dark';
-  const bgColor = isDark ? '#000' : '#f2f2f7';
+  const bgColor = isDark ? '#000' : '#f8f9fa';
   const fgColor = isDark ? '#fff' : '#111';
   const hoverColor = isDark ? '#fff' : '#000';
   const mutedColor = isDark ? '#a1a1aa' : '#52525b';
@@ -298,25 +258,31 @@ function App() {
               </div>
             </div>
 
-          </div>
-
-          <div style={{ marginTop: '4rem' }}>
-            <h3 style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1.2rem', color: fgColor, fontWeight: 600, margin: '0 0 1.5rem 0' }}>Licenses & Certifications</h3>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-              {certificationsList.map((cert, i) => (
-                <div key={i} className="glass-box" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <div>
-                    <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1rem', color: fgColor, fontWeight: 600 }}>{cert.title}</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: mutedColor, fontWeight: 500 }}>{cert.issuer}</p>
+            {/* Column 4: CERTIFICATIONS */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <h3 style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1.2rem', color: fgColor, fontWeight: 600, margin: '0 0 0.5rem 0' }}>Certifications</h3>
+              
+              <div className="glass-box cert-list">
+                {[
+                  { title: "Talent Acquisition", issuer: "NPTEL", date: "May 2026" },
+                  { title: "MongoDB with Java", issuer: "MongoDB", date: "Sep 2025" },
+                  { title: "Advanced Wordpress", issuer: "Udemy", date: "Jun 2023" },
+                  { title: "Python From Scratch", issuer: "Udemy", date: "Sep 2023" },
+                  { title: "Cybersecurity Awareness", issuer: "Infosys", date: "Sep 2025" },
+                  { title: "AI/ML Fundamentals", issuer: "Infosys", date: "Nov 2023" },
+                  { title: "AWS Cloud 101", issuer: "AWS", date: "Sep 2025" }
+                ].map((cert, i) => (
+                  <div key={i} className="cert-item" style={{ borderBottom: i === 6 ? 'none' : \`1px solid \${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}\` }}>
+                    <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.95rem', color: fgColor, fontWeight: 600 }}>{cert.title}</h4>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: mutedColor }}>
+                      <span>{cert.issuer}</span>
+                      <span>{cert.date}</span>
+                    </div>
                   </div>
-                  <div style={{ marginTop: '1rem' }}>
-                    <p style={{ margin: 0, fontSize: '0.75rem', color: mutedColor }}>Issued {cert.date}</p>
-                    {cert.id && <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.7rem', color: mutedColor, opacity: 0.7 }}>ID: {cert.id}</p>}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
+
           </div>
         </section>
 
@@ -329,7 +295,7 @@ function App() {
             {['Web Design', 'Graphic Design', 'Web Development', 'Business Analysis'].map((service, i) => (
               <a 
                 key={i} 
-                href={`mailto:sebastianantic10@gmail.com?subject=Inquiry%20regarding%20${encodeURIComponent(service)}`}
+                href={\`mailto:sebastianantic10@gmail.com?subject=Inquiry%20regarding%20\${encodeURIComponent(service)}\`}
                 style={{ 
                   padding: '0.5rem 1.2rem', 
                   borderRadius: '100px', 
@@ -342,7 +308,7 @@ function App() {
                   textDecoration: 'none',
                   transition: 'all 0.3s ease'
                 }}
-                onMouseOver={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = fgColor; e.currentTarget.style.boxShadow = `inset 0 0 0 1px ${fgColor}`; }}
+                onMouseOver={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = fgColor; e.currentTarget.style.boxShadow = \`inset 0 0 0 1px \${fgColor}\`; }}
                 onMouseOut={(e) => { e.currentTarget.style.backgroundColor = fgColor; e.currentTarget.style.color = bgColor; e.currentTarget.style.boxShadow = 'none'; }}
               >
                 {service}
@@ -352,8 +318,8 @@ function App() {
 
           <div className="projects-grid">
             
-            <div className="glass-box">
-              <span className="project-date" style={{ color: mutedColor, fontSize: '0.85rem', letterSpacing: '0.1em', marginBottom: '0.5rem', display: 'block', fontWeight: 600 }}>DEC 2025 – APR 2026</span>
+            <div className="glass-box" style={{ position: 'relative' }}>
+              <span style={{ position: 'absolute', top: '2rem', right: '2rem', color: mutedColor, fontSize: '0.85rem', letterSpacing: '0.1em' }}>DEC 2025 – APR 2026</span>
               <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.5rem', color: fgColor }}>Centralized Internal Assesment Webapp</h3>
               <p style={{ color: mutedColor, fontSize: '0.9rem', marginBottom: '1rem' }}>Associated with St. Joseph's University</p>
               <p style={{ color: fgColor, fontSize: '1rem', lineHeight: 1.6, marginBottom: '1rem', maxWidth: '800px' }}>
@@ -362,25 +328,25 @@ function App() {
               <p style={{ color: mutedColor, fontSize: '0.9rem', marginBottom: '1.5rem' }}><strong>Skills:</strong> React.js, Artificial Intelligence (AI), +9 skills</p>
               <div>
                 <a href="https://github.com/joeljaisonsebastian-dev/cia.git" target="_blank" rel="noreferrer" style={{ 
-                  display: 'inline-block', padding: '0.8rem 1.5rem', border: `1px solid ${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'}`, color: fgColor, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '100px', transition: 'all 0.3s ease' 
+                  display: 'inline-block', padding: '0.8rem 1.5rem', border: \`1px solid \${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'}\`, color: fgColor, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '100px', transition: 'all 0.3s ease' 
                 }} onMouseOver={(e) => { e.currentTarget.style.borderColor = fgColor; e.currentTarget.style.backgroundColor = fgColor; e.currentTarget.style.color = bgColor; }} onMouseOut={(e) => { e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'; e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = fgColor; }}>View on GitHub</a>
               </div>
             </div>
 
-            <div className="glass-box">
-              <span className="project-date" style={{ color: mutedColor, fontSize: '0.85rem', letterSpacing: '0.1em', marginBottom: '0.5rem', display: 'block', fontWeight: 600 }}>AUG 2025</span>
+            <div className="glass-box" style={{ position: 'relative' }}>
+              <span style={{ position: 'absolute', top: '2rem', right: '2rem', color: mutedColor, fontSize: '0.85rem', letterSpacing: '0.1em' }}>AUG 2025</span>
               <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.5rem', color: fgColor }}>Leap year Calculator</h3>
               <p style={{ color: mutedColor, fontSize: '0.9rem', marginBottom: '1rem' }}>Associated with St. Joseph's University</p>
               <p style={{ color: mutedColor, fontSize: '0.9rem', marginBottom: '1.5rem' }}><strong>Skills:</strong> HTML, HTML5, +5 skills</p>
               <div>
                 <a href="https://github.com/SebastianAntic/HTML-CSS/blob/main/Leap%20Year%20Calculator%20-%20Regular" target="_blank" rel="noreferrer" style={{ 
-                  display: 'inline-block', padding: '0.8rem 1.5rem', border: `1px solid ${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'}`, color: fgColor, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '100px', transition: 'all 0.3s ease' 
+                  display: 'inline-block', padding: '0.8rem 1.5rem', border: \`1px solid \${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'}\`, color: fgColor, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '100px', transition: 'all 0.3s ease' 
                 }} onMouseOver={(e) => { e.currentTarget.style.borderColor = fgColor; e.currentTarget.style.backgroundColor = fgColor; e.currentTarget.style.color = bgColor; }} onMouseOut={(e) => { e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'; e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = fgColor; }}>View on GitHub</a>
               </div>
             </div>
 
-            <div className="glass-box">
-              <span className="project-date" style={{ color: mutedColor, fontSize: '0.85rem', letterSpacing: '0.1em', marginBottom: '0.5rem', display: 'block', fontWeight: 600 }}>FEB 2024 – MAY 2024</span>
+            <div className="glass-box" style={{ position: 'relative' }}>
+              <span style={{ position: 'absolute', top: '2rem', right: '2rem', color: mutedColor, fontSize: '0.85rem', letterSpacing: '0.1em' }}>FEB 2024 – MAY 2024</span>
               <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.5rem', color: fgColor }}>Introduction to 6G Technologies</h3>
               <p style={{ color: mutedColor, fontSize: '0.9rem', marginBottom: '1rem' }}>Associated with St. Joseph's University</p>
               <p style={{ color: fgColor, fontSize: '1rem', lineHeight: 1.6, marginBottom: '1rem', maxWidth: '800px' }}>
@@ -410,7 +376,7 @@ function App() {
           <a href="mailto:sebastianantic10@gmail.com" style={{ 
             display: 'inline-block', 
             padding: '1rem 2.5rem', 
-            border: `1px solid ${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'}`, 
+            border: \`1px solid \${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'}\`, 
             color: fgColor, 
             textDecoration: 'none', 
             fontSize: '0.9rem', 
@@ -439,7 +405,8 @@ function App() {
             lineHeight: 0.8,
             letterSpacing: '-0.05em',
             textTransform: 'uppercase',
-            color: isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.2)',
+            color: '#fff',
+            mixBlendMode: 'difference',
             whiteSpace: 'nowrap',
             WebkitMaskImage: 'linear-gradient(to bottom, black 30%, transparent 100%)',
             maskImage: 'linear-gradient(to bottom, black 30%, transparent 100%)',
@@ -490,3 +457,261 @@ function App() {
 }
 
 export default App;
+`;
+
+fs.writeFileSync(path.join(__dirname, 'src', 'App.jsx'), appJsxContent);
+
+const appCssContent = \`.section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15vh;
+  padding: 0 10vw;
+  margin-top: 15vh;
+}
+
+/* Base Glass Effect */
+.glass-panel, .glass-box, .nav-container {
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  backdrop-filter: blur(40px) saturate(200%);
+  transition: background 0.5s ease, border 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+}
+
+/* Dark Mode Glass */
+.dark-theme .glass-panel, .dark-theme .glass-box, .dark-theme .nav-container {
+  background: rgba(30, 30, 30, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Light Mode Glass */
+.light-theme .glass-panel, .light-theme .glass-box, .light-theme .nav-container {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.glass-panel {
+  padding: 4rem;
+  border-radius: 32px;
+}
+
+.glass-box {
+  padding: 2rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.glass-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+.light-theme .glass-box:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+.nav-container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 2rem;
+  padding: 1rem 3rem;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.nav-link-item {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.theme-toggle-btn {
+  position: fixed;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+  top: 2rem;
+  right: 3rem;
+  border-radius: 50%;
+}
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+.dark-theme .theme-toggle-btn {
+  color: #fff;
+}
+.light-theme .theme-toggle-btn {
+  color: #111;
+}
+
+/* Typography & Layout */
+.hero-title {
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.dark-theme .hero-title { text-shadow: none; color: #fff; }
+.light-theme .hero-title { text-shadow: 0 4px 24px rgba(0,0,0,0.05); color: #111; }
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  margin-top: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.resume-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.cert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cert-item {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.footer-container {
+  width: 100%;
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  position: relative;
+}
+
+/* Tablet optimizations */
+@media (max-width: 1024px) {
+  .section-container {
+    padding: 0 6vw;
+  }
+  .glass-panel {
+    padding: 3rem;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .section-container {
+    padding: 0 5vw;
+    gap: 6vh;
+    margin-top: 12vh;
+  }
+  
+  .glass-panel {
+    padding: 1.5rem;
+    border-radius: 24px;
+  }
+  
+  .glass-box {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .nav-container {
+    padding: 0.8rem 1.5rem;
+    top: 1rem;
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .nav-links {
+    gap: 1.2rem;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .nav-link-item {
+    font-size: 0.7rem;
+  }
+
+  .theme-toggle-btn {
+    top: auto;
+    bottom: 2rem;
+    right: 2rem;
+    background: inherit;
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    backdrop-filter: blur(40px) saturate(200%);
+  }
+
+  .dark-theme .theme-toggle-btn {
+    background: rgba(30,30,30,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .light-theme .theme-toggle-btn {
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.8);
+  }
+
+  .resume-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .projects-grid {
+    gap: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-text {
+    font-size: 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .footer-container {
+    padding: 2rem 1rem;
+  }
+}\`;
+
+fs.writeFileSync(path.join(__dirname, 'src', 'App.css'), appCssContent);
+
+console.log("Rewrite complete.");

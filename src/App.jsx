@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 
 const MovingVectorBackground = ({ theme }) => (
   <div style={{
@@ -13,26 +14,58 @@ const MovingVectorBackground = ({ theme }) => (
     pointerEvents: 'none'
   }}>
     <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
-      {[...Array(20)].map((_, i) => (
-        <path
-          key={i}
-          fill="none"
-          stroke={theme === 'dark' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.2)'}
-          strokeWidth="1.5"
-          d={`M0,${300 + i * 20} C300,${200 + i * 30} 700,${600 + i * 15} 1000,${300 + i * 20}`}
-        >
-          <animate
-            attributeName="d"
-            dur={`${12 + i * 0.5}s`}
-            repeatCount="indefinite"
-            values={`
-              M0,${300 + i * 20} C300,${200 + i * 30} 700,${600 + i * 15} 1000,${300 + i * 20};
-              M0,${300 + i * 20} C300,${600 + i * 15} 700,${200 + i * 30} 1000,${300 + i * 20};
-              M0,${300 + i * 20} C300,${200 + i * 30} 700,${600 + i * 15} 1000,${300 + i * 20}
-            `}
-          />
-        </path>
-      ))}
+      {[...Array(60)].map((_, i) => {
+        const offset = i - 30;
+        const strokeOp = theme === 'dark' ? (0.01 + Math.abs(offset) * 0.015) : (0.01 + Math.abs(offset) * 0.01);
+        const strokeColor = theme === 'dark' ? `rgba(255,255,255,${strokeOp})` : `rgba(0,0,0,${strokeOp})`;
+        const strokeW = 1 + Math.random();
+
+        const yStart = 500 + offset * 15 + Math.sin(i) * 50;
+        const yEnd = 500 - offset * 15 + Math.cos(i) * 50;
+        
+        const cp1x_1 = 200 + offset * 15;
+        const cp1y_1 = 200 - offset * 30 + Math.sin(i) * 100;
+        const cp2x_1 = 800 - offset * 15;
+        const cp2y_1 = 800 + offset * 30 - Math.cos(i) * 100;
+        
+        const cp1x_2 = 300 - offset * 20;
+        const cp1y_2 = 800 + offset * 20 + Math.sin(i*1.5) * 100;
+        const cp2x_2 = 700 + offset * 20;
+        const cp2y_2 = 200 - offset * 20 - Math.cos(i*1.5) * 100;
+
+        const cp1x_3 = 400 + offset * 10;
+        const cp1y_3 = 400 + Math.sin(i*2) * 150;
+        const cp2x_3 = 600 - offset * 10;
+        const cp2y_3 = 600 - Math.cos(i*2) * 150;
+
+        const cp1x_4 = 100 - offset * 5;
+        const cp1y_4 = 600 - offset * 40;
+        const cp2x_4 = 900 + offset * 5;
+        const cp2y_4 = 400 + offset * 40;
+
+        return (
+          <path
+            key={i}
+            fill="none"
+            stroke={strokeColor}
+            strokeWidth={strokeW}
+            d={`M-100,${yStart} C${cp1x_1},${cp1y_1} ${cp2x_1},${cp2y_1} 1100,${yEnd}`}
+          >
+            <animate
+              attributeName="d"
+              dur={`${15 + Math.abs(offset) * 0.4 + (i%5)}s`}
+              repeatCount="indefinite"
+              values={`
+                M-100,${yStart} C${cp1x_1},${cp1y_1} ${cp2x_1},${cp2y_1} 1100,${yEnd};
+                M-100,${yStart} C${cp1x_2},${cp1y_2} ${cp2x_2},${cp2y_2} 1100,${yEnd};
+                M-100,${yStart} C${cp1x_3},${cp1y_3} ${cp2x_3},${cp2y_3} 1100,${yEnd};
+                M-100,${yStart} C${cp1x_4},${cp1y_4} ${cp2x_4},${cp2y_4} 1100,${yEnd};
+                M-100,${yStart} C${cp1x_1},${cp1y_1} ${cp2x_1},${cp2y_1} 1100,${yEnd}
+              `}
+            />
+          </path>
+        );
+      })}
     </svg>
   </div>
 );
@@ -105,12 +138,11 @@ function App() {
       <MovingVectorBackground theme={theme} />
 
       {/* Standalone Theme Toggle Button */}
-      <button 
+      <button className="theme-toggle-btn" 
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
         style={{
           position: 'fixed',
-          top: '2rem',
-          right: '3rem',
+          
           background: 'transparent',
           border: 'none',
           color: fgColor,
@@ -129,13 +161,11 @@ function App() {
       </button>
 
       {/* Floating Top Navbar */}
-      <nav style={{
+      <nav className="nav-container" style={{
         position: 'fixed',
-        top: '2rem',
         left: '50%',
         transform: 'translateX(-50%)',
         width: 'auto',
-        padding: '1rem 3rem',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -150,7 +180,7 @@ function App() {
         transition: 'background 0.5s ease, border 0.5s ease'
       }}>
         {/* Navigation Links */}
-        <div style={{ display: 'flex', gap: '3rem' }}>
+        <div className="nav-links" style={{ display: 'flex' }}>
           {[
             { name: 'About', id: '#about' },
             { name: 'Projects', id: '#projects' },
@@ -159,12 +189,10 @@ function App() {
             <a 
               key={i} 
               href={item.id} 
-              style={{
+              className="nav-link-item" style={{
                 color: mutedColor,
                 textDecoration: 'none',
-                fontSize: '0.8rem',
                 fontWeight: 600,
-                letterSpacing: '0.1em',
                 textTransform: 'uppercase',
                 transition: 'color 0.3s ease',
               }}
@@ -182,12 +210,12 @@ function App() {
       </nav>
 
       {/* Sections Container */}
-      <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '20vh', padding: '0 10vw 0 10vw' }}>
+      <div className="section-container" style={{ position: 'relative', zIndex: 10 }}>
         
         {/* Hero Section */}
         <section style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <h1 style={{
-            fontSize: 'clamp(3rem, 8vw, 8rem)',
+          <h1 className="hero-title" style={{
+            
             fontWeight: 900,
             margin: 0,
             letterSpacing: '-0.02em',
@@ -202,21 +230,21 @@ function App() {
 
         {/* Dynamic Glassmorphic Sections */}
         {/* About Section - 3 Column Resume Layout */}
-        <section id="about" style={{
-          padding: '4rem',
+        <section id="about" className="glass-panel" style={{
+          
           background: isDark ? 'rgba(255, 255, 255, 0.01)' : 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(40px)',
           WebkitBackdropFilter: 'blur(40px)',
-          borderRadius: '24px',
+          
           border: isDark ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)',
           boxShadow: isDark ? '0 16px 40px rgba(0,0,0,0.4)' : '0 16px 40px rgba(0,0,0,0.05)',
           transition: 'background 0.5s ease, border 0.5s ease'
         }}>
-          <p style={{ color: mutedColor, fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '4rem', maxWidth: '800px' }}>
+          <p className="about-text" style={{ color: mutedColor, fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '4rem', maxWidth: '800px' }}>
             My educational journey at St. Joseph's University builds core competencies in web page scripting and programming. Alongside volunteering for the National Service Scheme, I am developing a balanced perspective on technology and community impact, setting the stage for a future in web development and business analysis.
           </p>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
+          <div className="resume-grid">
             
             {/* Column 1: EXPERIENCE & EDUCATION */}
             <div>
@@ -338,17 +366,17 @@ function App() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" style={{
-          padding: '4rem',
+        <section id="projects" className="glass-panel" style={{
+          
           background: isDark ? 'rgba(255, 255, 255, 0.01)' : 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(40px)',
           WebkitBackdropFilter: 'blur(40px)',
-          borderRadius: '24px',
+          
           border: isDark ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)',
           boxShadow: isDark ? '0 16px 40px rgba(0,0,0,0.4)' : '0 16px 40px rgba(0,0,0,0.05)',
           transition: 'background 0.5s ease, border 0.5s ease'
         }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', marginTop: 0, textTransform: 'uppercase', letterSpacing: '0.05em', color: fgColor }}>Projects</h2>
+          <h2 className="projects-title" style={{  marginBottom: '3rem', marginTop: 0, textTransform: 'uppercase', letterSpacing: '0.05em', color: fgColor }}>Projects</h2>
           
           {/* Services Section embedded in Projects */}
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
@@ -423,12 +451,12 @@ function App() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" style={{
-          padding: '4rem',
+        <section id="contact" className="glass-panel" style={{
+          
           background: isDark ? 'rgba(255, 255, 255, 0.01)' : 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(40px)',
           WebkitBackdropFilter: 'blur(40px)',
-          borderRadius: '24px',
+          
           border: isDark ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)',
           boxShadow: isDark ? '0 16px 40px rgba(0,0,0,0.4)' : '0 16px 40px rgba(0,0,0,0.05)',
           transition: 'background 0.5s ease, border 0.5s ease',
@@ -438,7 +466,7 @@ function App() {
           justifyContent: 'center',
           textAlign: 'center'
         }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', marginTop: 0, textTransform: 'uppercase', letterSpacing: '0.05em', color: fgColor }}>Get in Touch</h2>
+          <h2 className="contact-title" style={{  marginBottom: '1rem', marginTop: 0, textTransform: 'uppercase', letterSpacing: '0.05em', color: fgColor }}>Get in Touch</h2>
           <p style={{ fontSize: '1.2rem', color: mutedColor, lineHeight: 1.6, maxWidth: '600px', marginBottom: '3rem' }}>
             I am currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
           </p>
@@ -486,14 +514,14 @@ function App() {
       </div>
 
       {/* Footer */}
-      <footer style={{
+      <footer className="footer-container" style={{
         width: '100%',
-        padding: '2rem 4rem',
+        
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         boxSizing: 'border-box',
-        gap: '4rem',
+        
         zIndex: 1000,
         position: 'relative'
       }}>

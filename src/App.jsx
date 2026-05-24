@@ -302,7 +302,7 @@ function App() {
             <div>
               <h3 style={{ textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '2rem', fontSize: '1.2rem', color: fgColor, fontWeight: 500 }}>Certifications</h3>
               
-              <div style={{ paddingRight: '1rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ paddingRight: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {[
                   { title: "Talent Acquisition and Management", issuer: "NPTEL", date: "May 2026" },
                   { title: "Using MongoDB with Java", issuer: "MongoDB", date: "Sep 2025" },
@@ -323,9 +323,9 @@ function App() {
                   { title: "AWS Educate Web Builder", issuer: "Amazon Web Services (AWS)", date: "Sep 2025" },
                   { title: "Getting Started with Microsoft Excel", issuer: "Coursera", date: "Jun 2025" }
                 ].map((cert, i) => (
-                  <div key={i} style={{ paddingBottom: '1.5rem', borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}` }}>
-                    <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.95rem', color: fgColor, fontWeight: 600 }}>{cert.title}</h4>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: mutedColor }}>
+                  <div key={i} style={{ paddingBottom: '0.75rem', borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}` }}>
+                    <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.85rem', color: fgColor, fontWeight: 600 }}>{cert.title}</h4>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: mutedColor }}>
                       <span>{cert.issuer}</span>
                       <span>{cert.date}</span>
                     </div>

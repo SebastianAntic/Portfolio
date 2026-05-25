@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 .section-container {
   display: flex;
   flex-direction: column;
@@ -22,9 +24,11 @@
 
 /* Light Mode Glass */
 .light-theme .glass-panel, .light-theme .glass-box, .light-theme .nav-container {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.3); /* liquid glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(60px) saturate(180%);
+  backdrop-filter: blur(60px) saturate(180%);
 }
 
 .glass-panel {
@@ -126,14 +130,14 @@
 
 .resume-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
 }
 
 .cert-list {
@@ -232,5 +236,82 @@
   
   .footer-container {
     padding: 2rem 1rem;
+  }
+}
+
+.marquee-container {
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+.marquee-content {
+  display: flex;
+  white-space: nowrap;
+  animation: scrollMarquee 40s linear infinite;
+}
+
+.marquee-content.reverse {
+  animation: scrollMarqueeReverse 40s linear infinite;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+.marquee-content span {
+  font-size: clamp(2rem, 5vw, 5rem);
+  padding-right: 2rem;
+  font-family: 'Bebas Neue', 'Inter', system-ui, sans-serif;
+  letter-spacing: 0.05em;
+  transition: font-weight 0.3s ease, -webkit-text-stroke 0.3s ease, color 0.3s ease;
+}
+
+.marquee-content span:hover {
+  color: var(--fg-color, currentColor);
+  -webkit-text-stroke: 0px;
+  font-weight: 900;
+}
+
+/* Outline text effect */
+.outline-text span {
+  color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+}
+
+.light-theme .outline-text span {
+  -webkit-text-stroke-color: #111;
+}
+
+.dark-theme .outline-text span {
+  -webkit-text-stroke-color: #fff;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollMarqueeReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Landscape and Display Optimizations */
+@media (max-width: 950px) and (orientation: landscape) {
+  .section-container {
+    gap: 8vh;
+    padding-top: 15vh;
+  }
+  .hero-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+  }
+  .marquee-section {
+    padding: 1.5rem 0 !important;
   }
 }

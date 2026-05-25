@@ -221,6 +221,25 @@ function App() {
           </h1>
         </section>
 
+        <section className="marquee-section" style={{ height: 'auto', padding: '3rem 0', width: '100vw', marginLeft: 'calc(-50vw + 50%)', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <div className="marquee-container">
+            <div className="marquee-track">
+              <div className="marquee-content outline-text">
+                <span>WEB DEVELOPER • BUSINESS ANALYST • SALES EXECUTIVE • TECH ENTHUSIAST • AI & ML EXPLORER • CYBERSECURITY ADVOCATE • PROBLEM SOLVER • COOK • </span>
+                <span>WEB DEVELOPER • BUSINESS ANALYST • SALES EXECUTIVE • TECH ENTHUSIAST • AI & ML EXPLORER • CYBERSECURITY ADVOCATE • PROBLEM SOLVER • COOK • </span>
+              </div>
+            </div>
+          </div>
+          <div className="marquee-container">
+            <div className="marquee-track">
+              <div className="marquee-content outline-text reverse">
+                <span>JAVA • PYTHON • HTML • C • C++ • C# • CSS • JAVASCRIPT • REACT.JS • JAVA • PYTHON • HTML • C • C++ • C# • CSS • JAVASCRIPT • REACT.JS • </span>
+                <span>JAVA • PYTHON • HTML • C • C++ • C# • CSS • JAVASCRIPT • REACT.JS • JAVA • PYTHON • HTML • C • C++ • C# • CSS • JAVASCRIPT • REACT.JS • </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* About Section */}
         <section id="about" className="glass-panel">
           <p className="about-text" style={{ color: fgColor, fontSize: '1.2rem', lineHeight: 1.8, marginBottom: '4rem', maxWidth: '800px', fontWeight: 500 }}>
@@ -324,7 +343,7 @@ function App() {
         <section id="projects" className="glass-panel">
           <h2 className="section-title" style={{ color: fgColor }}>Projects</h2>
           
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem', justifyContent: 'center', alignItems: 'center' }}>
             <span style={{ fontSize: '1rem', fontWeight: 600, color: fgColor, display: 'flex', alignItems: 'center' }}>SERVICES:</span>
             {['Web Design', 'Graphic Design', 'Web Development', 'Business Analysis'].map((service, i) => (
               <a 

@@ -229,7 +229,7 @@ function App() {
       <button className="theme-toggle-btn" 
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
       >
-        {isDark ? <MoonIcon /> : <SunIcon />}
+        {isDark ? <SunIcon /> : <MoonIcon />}
       </button>
 
       {/* Sections Container */}

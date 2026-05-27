@@ -337,8 +337,7 @@ function App() {
               paddingBottom: (!showAllSkills && skillsList.length > 2) ? '1rem' : '0'
             }}>
               {skillsList.slice(0, showAllSkills ? skillsList.length : 2).map((skill, i) => (
-                <div key={i} className="glass-box" style={{ flex: '1 1 calc(50% - 0.75rem)', minWidth: '280px', padding: '1.5rem', position: 'relative' }}>
-                  <span style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', color: mutedColor, fontSize: '0.75rem', letterSpacing: '0.1em' }}>{skill.id}</span>
+                <div key={i} className="glass-box" style={{ flex: '1 1 calc(50% - 0.75rem)', minWidth: '280px', padding: '1.5rem' }}>
                   <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', textTransform: 'uppercase', color: fgColor, fontWeight: 600 }}>{skill.title}</h4>
                   <p style={{ fontSize: '0.95rem', color: mutedColor, lineHeight: 1.6, margin: 0, marginTop: '1rem' }}>{skill.desc}</p>
                 </div>

@@ -225,7 +225,31 @@ function App() {
           <div className="marquee-container">
             <div className="marquee-track">
               <div className="marquee-content outline-text">
-                <span>WEB DEVELOPER • BUSINESS ANALYST • SALES EXECUTIVE • TECH ENTHUSIAST • AI & ML EXPLORER • CYBERSECURITY ADVOCATE • PROBLEM SOLVER • COOK • </span>
+                <span>WEB DEVELOPER</span>
+                <span> • </span>
+                <span>BUSINESS ANALYST</span>
+                <span> • </span>
+                <span>SALES EXECUTIVE</span>
+                <span> • </span>
+                <span>TECH ENTHUSIAST</span>
+                <span> • </span>
+                <span>AI & ML EXPLORER</span>
+                <span> • </span>
+                <span>CYBERSECURITY ADVOCATE</span>
+                <span> • </span>
+                <span>PROBLEM SOLVER</span>
+                <span> • </span>
+                <span>COOK</span>
+                <span> • </span>
+               </div>
+            </div>
+          </div>
+          <div className="marquee-container">
+            <div className="marquee-track">
+              <div className="marquee-content outline-text reverse">
+                <span>JAVA</span>
+                <span> • </span>
+                <span>PYTHON</span>
                 <span>WEB DEVELOPER • BUSINESS ANALYST • SALES EXECUTIVE • TECH ENTHUSIAST • AI & ML EXPLORER • CYBERSECURITY ADVOCATE • PROBLEM SOLVER • COOK • </span>
               </div>
             </div>
@@ -233,8 +257,24 @@ function App() {
           <div className="marquee-container">
             <div className="marquee-track">
               <div className="marquee-content outline-text reverse">
-                <span>JAVA • PYTHON • HTML • C • C++ • C# • CSS • JAVASCRIPT • REACT.JS • JAVA • PYTHON • HTML • C • C++ • C# • CSS • JAVASCRIPT • REACT.JS • </span>
-                <span>JAVA • PYTHON • HTML • C • C++ • C# • CSS • JAVASCRIPT • REACT.JS • JAVA • PYTHON • HTML • C • C++ • C# • CSS • JAVASCRIPT • REACT.JS • </span>
+                <span>JAVA</span>
+                <span> • </span>
+                <span>PYTHON</span>
+                <span> • </span>
+                <span>HTML</span>
+                <span> • </span>
+                <span>C</span>
+                <span> • </span>
+                <span>C++</span>
+                <span> • </span>
+                <span>C#</span>
+                <span> • </span>
+                <span>CSS</span>
+                <span> • </span>
+                <span>JAVASCRIPT</span>
+                <span> • </span>
+                <span>REACT.JS</span>
+                <span> • </span>
               </div>
             </div>
           </div>

@@ -66,6 +66,7 @@
   align-items: center;
   z-index: 1000;
   width: auto;
+  box-sizing: border-box;
 }
 
 .nav-links {
@@ -195,6 +196,7 @@
     top: 1rem;
     width: 90%;
     max-width: 400px;
+    box-sizing: border-box;
   }
 
   .nav-links {
@@ -273,15 +275,13 @@
 }
 
 .marquee-content span:hover {
-  color: var(--fg-color, currentColor);
-  -webkit-text-stroke: 0px;
   font-weight: 900;
 }
 
 /* Outline text effect */
 .outline-text span {
   color: transparent;
-  -webkit-text-stroke: 1.5px currentColor;
+  -webkit-text-stroke: 1.5px;
 }
 
 .light-theme .outline-text span {
@@ -290,6 +290,16 @@
 
 .dark-theme .outline-text span {
   -webkit-text-stroke-color: #fff;
+}
+
+.light-theme .outline-text span:hover {
+  color: #111;
+  -webkit-text-stroke: 0px;
+}
+
+.dark-theme .outline-text span:hover {
+  color: #fff;
+  -webkit-text-stroke: 0px;
 }
 
 @keyframes scrollMarquee {

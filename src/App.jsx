@@ -157,6 +157,15 @@ const certificationsList = [
 
 function App() {
   const [theme, setTheme] = useState('dark');
+  const [showAllCerts, setShowAllCerts] = useState(false);
+  const [showAllSkills, setShowAllSkills] = useState(false);
+
+  const skillsList = [
+    { id: '01', title: 'Core Competencies', desc: 'Teamwork, Communication, Problem Solving, Analytical Skills, Leadership, Time Management, Research Skills.' },
+    { id: '02', title: 'Design & Web Dev', desc: 'Front-End Dev, Web Design, HTML5, CSS, JavaScript, React.js, WordPress.' },
+    { id: '03', title: 'Backend & DB', desc: 'Databases, MongoDB, NoSQL, SQL, Java, Python, C++, C#.' },
+    { id: '04', title: 'Tech & Networks', desc: 'AI, ML, TensorFlow, Cellular Comms, Networking, Cybersecurity.' }
+  ];
 
   const isDark = theme === 'dark';
   const bgColor = isDark ? '#000' : '#f2f2f7';
@@ -168,13 +177,25 @@ function App() {
   return (
     <div className={themeClass} style={{ 
       minHeight: '100vh', 
+      width: '100%',
+      overflowX: 'hidden',
       backgroundColor: bgColor, 
       color: fgColor, 
       fontFamily: 'system-ui, -apple-system, sans-serif', 
       position: 'relative', 
       zIndex: 1,
-      transition: 'background-color 0.5s ease, color 0.5s ease'
+      transition: 'background-color 0.3s ease, color 0.3s ease'
     }}>
+      
+      {/* Viewport Edge Fades */}
+      <div style={{
+        position: 'fixed', top: 0, left: 0, right: 0, height: '10vh', minHeight: '60px', zIndex: 50, pointerEvents: 'none',
+        background: isDark ? 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0))' : 'linear-gradient(to bottom, rgba(242,242,247,0.9), rgba(242,242,247,0))'
+      }}></div>
+      <div style={{
+        position: 'fixed', bottom: 0, left: 0, right: 0, height: '10vh', minHeight: '60px', zIndex: 50, pointerEvents: 'none',
+        background: isDark ? 'linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0))' : 'linear-gradient(to top, rgba(242,242,247,0.9), rgba(242,242,247,0))'
+      }}></div>
       
       <MovingVectorBackground theme={theme} />
 
@@ -222,62 +243,33 @@ function App() {
         </section>
 
         <section className="marquee-section" style={{ height: 'auto', padding: '3rem 0', width: '100vw', marginLeft: 'calc(-50vw + 50%)', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-          <div className="marquee-container">
-            <div className="marquee-track">
-              <div className="marquee-content outline-text">
-                <span>WEB DEVELOPER</span>
-                <span> • </span>
-                <span>BUSINESS ANALYST</span>
-                <span> • </span>
-                <span>SALES EXECUTIVE</span>
-                <span> • </span>
-                <span>TECH ENTHUSIAST</span>
-                <span> • </span>
-                <span>AI & ML EXPLORER</span>
-                <span> • </span>
-                <span>CYBERSECURITY ADVOCATE</span>
-                <span> • </span>
-                <span>PROBLEM SOLVER</span>
-                <span> • </span>
-                <span>COOK</span>
-                <span> • </span>
-               </div>
-            </div>
-          </div>
-          <div className="marquee-container">
-            <div className="marquee-track">
-              <div className="marquee-content outline-text reverse">
-                <span>JAVA</span>
-                <span> • </span>
-                <span>PYTHON</span>
-                <span>WEB DEVELOPER • BUSINESS ANALYST • SALES EXECUTIVE • TECH ENTHUSIAST • AI & ML EXPLORER • CYBERSECURITY ADVOCATE • PROBLEM SOLVER • COOK • </span>
+          {[
+            {
+              items: ["WEB DEVELOPER", "BUSINESS ANALYST", "SALES EXECUTIVE", "TECH ENTHUSIAST", "AI & ML EXPLORER", "CYBERSECURITY ADVOCATE", "COOK"],
+              reverse: false
+            },
+            {
+              items: ["JAVA", "PYTHON", "HTML", "C", "C++", "C#", "CSS", "JAVASCRIPT", "REACT.JS", "MONGODB", "TENSORFLOW"],
+              reverse: true
+            },
+            {
+              items: ["TEAMWORK", "PROBLEM SOLVER", "PROBLEM SOLVING", "ANALYTICAL SKILLS", "LEADERSHIP", "TIME MANAGEMENT", "RESEARCH SKILLS", "COMMUNICATION", "ADAPTABILITY", "CRITICAL THINKING"],
+              reverse: false
+            }
+          ].map((marquee, idx) => (
+            <div className="marquee-container" key={idx}>
+              <div className="marquee-track">
+                <div className={`marquee-content outline-text ${marquee.reverse ? 'reverse' : ''}`}>
+                  {Array(4).fill(marquee.items).flat().map((item, i) => (
+                    <React.Fragment key={i}>
+                      <span>{item}</span>
+                      <span> • </span>
+                    </React.Fragment>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="marquee-container">
-            <div className="marquee-track">
-              <div className="marquee-content outline-text reverse">
-                <span>JAVA</span>
-                <span> • </span>
-                <span>PYTHON</span>
-                <span> • </span>
-                <span>HTML</span>
-                <span> • </span>
-                <span>C</span>
-                <span> • </span>
-                <span>C++</span>
-                <span> • </span>
-                <span>C#</span>
-                <span> • </span>
-                <span>CSS</span>
-                <span> • </span>
-                <span>JAVASCRIPT</span>
-                <span> • </span>
-                <span>REACT.JS</span>
-                <span> • </span>
-              </div>
-            </div>
-          </div>
+          ))}
         </section>
 
         {/* About Section */}
@@ -328,43 +320,75 @@ function App() {
               </div>
             </div>
 
-            {/* Column 3: SKILLS */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <h3 style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1.2rem', color: fgColor, fontWeight: 600, margin: '0 0 0.5rem 0' }}>Skills</h3>
-              
-              <div className="glass-box" style={{ position: 'relative' }}>
-                <span style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', color: mutedColor, fontSize: '0.75rem', letterSpacing: '0.1em' }}>01</span>
-                <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', textTransform: 'uppercase', color: fgColor, fontWeight: 600 }}>Core Competencies</h4>
-                <p style={{ fontSize: '0.95rem', color: mutedColor, lineHeight: 1.6, margin: 0 }}>Teamwork, Communication, Problem Solving, Analytical Skills, Leadership, Time Management, Research Skills.</p>
-              </div>
 
-              <div className="glass-box" style={{ position: 'relative' }}>
-                <span style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', color: mutedColor, fontSize: '0.75rem', letterSpacing: '0.1em' }}>02</span>
-                <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', textTransform: 'uppercase', color: fgColor, fontWeight: 600 }}>Design & Web Dev</h4>
-                <p style={{ fontSize: '0.95rem', color: mutedColor, lineHeight: 1.6, margin: 0 }}>Front-End Dev, Web Design, HTML5, CSS, JavaScript, React.js, WordPress.</p>
-              </div>
 
-              <div className="glass-box" style={{ position: 'relative' }}>
-                <span style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', color: mutedColor, fontSize: '0.75rem', letterSpacing: '0.1em' }}>03</span>
-                <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', textTransform: 'uppercase', color: fgColor, fontWeight: 600 }}>Backend & DB</h4>
-                <p style={{ fontSize: '0.95rem', color: mutedColor, lineHeight: 1.6, margin: 0 }}>Databases, MongoDB, NoSQL, SQL, Java, Python, C++, C#.</p>
-              </div>
+          </div>
 
-              <div className="glass-box" style={{ position: 'relative' }}>
-                <span style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', color: mutedColor, fontSize: '0.75rem', letterSpacing: '0.1em' }}>04</span>
-                <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', textTransform: 'uppercase', color: fgColor, fontWeight: 600 }}>Tech & Networks</h4>
-                <p style={{ fontSize: '0.95rem', color: mutedColor, lineHeight: 1.6, margin: 0 }}>AI, ML, TensorFlow, Cellular Comms, Networking, Cybersecurity.</p>
-              </div>
+          <div style={{ marginTop: '4rem' }}>
+            <h3 style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1.2rem', color: fgColor, fontWeight: 600, margin: '0 0 1.5rem 0' }}>Skills</h3>
+            
+            <div style={{ 
+              display: 'flex', 
+              flexWrap: 'wrap',
+              gap: '1.5rem', 
+              position: 'relative',
+              WebkitMaskImage: (!showAllSkills && skillsList.length > 2) ? 'linear-gradient(to bottom, black 60%, transparent 100%)' : 'none',
+              maskImage: (!showAllSkills && skillsList.length > 2) ? 'linear-gradient(to bottom, black 60%, transparent 100%)' : 'none',
+              paddingBottom: (!showAllSkills && skillsList.length > 2) ? '1rem' : '0'
+            }}>
+              {skillsList.slice(0, showAllSkills ? skillsList.length : 2).map((skill, i) => (
+                <div key={i} className="glass-box" style={{ flex: '1 1 calc(50% - 0.75rem)', minWidth: '280px', padding: '1.5rem', position: 'relative' }}>
+                  <span style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', color: mutedColor, fontSize: '0.75rem', letterSpacing: '0.1em' }}>{skill.id}</span>
+                  <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', textTransform: 'uppercase', color: fgColor, fontWeight: 600 }}>{skill.title}</h4>
+                  <p style={{ fontSize: '0.95rem', color: mutedColor, lineHeight: 1.6, margin: 0, marginTop: '1rem' }}>{skill.desc}</p>
+                </div>
+              ))}
             </div>
-
+            {skillsList.length > 2 && (
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+                <button 
+                  onClick={() => setShowAllSkills(!showAllSkills)}
+                  style={{ 
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: mutedColor,
+                    fontSize: '0.8rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.5rem 1rem',
+                    transition: 'color 0.3s ease'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.color = fgColor}
+                  onMouseOut={(e) => e.currentTarget.style.color = mutedColor}
+                  aria-label={showAllSkills ? "Show less" : "Show more"}
+                >
+                  {showAllSkills ? "Show Less" : "Show More"}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: showAllSkills ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s' }}>
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
 
           <div style={{ marginTop: '4rem' }}>
             <h3 style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1.2rem', color: fgColor, fontWeight: 600, margin: '0 0 1.5rem 0' }}>Licenses & Certifications</h3>
             
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-              {certificationsList.map((cert, i) => (
-                <div key={i} className="glass-box" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ 
+              display: 'flex', 
+              flexWrap: 'wrap',
+              gap: '1.5rem', 
+              position: 'relative',
+              WebkitMaskImage: (!showAllCerts && certificationsList.length > 4) ? 'linear-gradient(to bottom, black 60%, transparent 100%)' : 'none',
+              maskImage: (!showAllCerts && certificationsList.length > 4) ? 'linear-gradient(to bottom, black 60%, transparent 100%)' : 'none',
+              paddingBottom: (!showAllCerts && certificationsList.length > 4) ? '1rem' : '0'
+            }}>
+              {certificationsList.slice(0, showAllCerts ? certificationsList.length : 4).map((cert, i) => (
+                <div key={i} className="glass-box" style={{ flex: '1 1 calc(50% - 0.75rem)', minWidth: '280px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
                     <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1rem', color: fgColor, fontWeight: 600 }}>{cert.title}</h4>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: mutedColor, fontWeight: 500 }}>{cert.issuer}</p>
@@ -376,6 +400,35 @@ function App() {
                 </div>
               ))}
             </div>
+            {certificationsList.length > 4 && (
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+                <button 
+                  onClick={() => setShowAllCerts(!showAllCerts)}
+                  style={{ 
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: mutedColor,
+                    fontSize: '0.8rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.5rem 1rem',
+                    transition: 'color 0.3s ease'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.color = fgColor}
+                  onMouseOut={(e) => e.currentTarget.style.color = mutedColor}
+                  aria-label={showAllCerts ? "Show less" : "Show more"}
+                >
+                  {showAllCerts ? "Show Less" : "Show More"}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: showAllCerts ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s' }}>
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
@@ -483,7 +536,7 @@ function App() {
         {/* Giant Name Footer */}
         <div style={{
           width: '100vw',
-          marginLeft: '-10vw',
+          marginLeft: 'calc(-50vw + 50%)',
           marginTop: '10vh',
           display: 'flex',
           justifyContent: 'center',
@@ -492,7 +545,7 @@ function App() {
           paddingBottom: '0'
         }}>
           <h1 style={{
-            fontSize: '13vw',
+            fontSize: '11vw',
             fontWeight: 900,
             margin: 0,
             lineHeight: 0.8,
@@ -509,8 +562,7 @@ function App() {
       </div>
 
       {/* Footer */}
-      <footer className="footer-container">
-
+      <footer className="footer-container" style={{ flexDirection: 'column', gap: '1.5rem', padding: '4rem 1rem' }}>
         {/* Social Icons */}
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           {[

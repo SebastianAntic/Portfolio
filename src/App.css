@@ -325,3 +325,10 @@
     padding: 1.5rem 0 !important;
   }
 }
+img {
+  filter: saturate(0);
+  transition: filter 0.3s;
+}
+img:hover {
+  filter: saturate(1);
+}

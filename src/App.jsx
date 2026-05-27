@@ -275,6 +275,9 @@ function App() {
         {/* About Section */}
         <section id="about" className="glass-panel">
           <h2 className="section-title" style={{ color: fgColor }}>ME</h2>
+          <center>
+            <img src="src/me.jpeg" alt="Profile Image" width="200px" style={{ borderRadius: '50%' }} />
+          </center>
           <p className="about-text" style={{ color: fgColor, fontSize: '1.2rem', lineHeight: 1.8, marginBottom: '4rem', maxWidth: '800px', fontWeight: 200 }}>
             I am a highly motivated software developer and technology enthusiast currently pursuing a Bachelor of Computer Applications (BCA) at St. Joseph's University in Bengaluru. With a strong foundation in mobile and web application development, I specialize in building intuitive, efficient, and scalable digital solutions. My technical expertise spans Java, XML, Flutter, and Dart, complemented by practical experience in database management and backend integration using Firebase and MongoDB.<br></br>
             Currently, I am spearheading the development of a Centralized Internal Assessment (CIA) application designed to streamline academic evaluations for both educators and students. This project underscores my ability to manage a software development lifecycle from initial conceptualization—including ER diagram mapping and Gantt chart scheduling—through to deployment. To stay at the forefront of the industry, I continuously expand my technical repertoire through rigorous coursework in Cloud Computing, Computer Networks, and E-Business, alongside specialized training in React and CRUD operations.

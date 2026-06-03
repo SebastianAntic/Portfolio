@@ -255,6 +255,10 @@ function App() {
             {
               items: ["TEAMWORK", "PROBLEM SOLVER", "PROBLEM SOLVING", "ANALYTICAL SKILLS", "LEADERSHIP", "TIME MANAGEMENT", "RESEARCH SKILLS", "COMMUNICATION", "ADAPTABILITY", "CRITICAL THINKING"],
               reverse: false
+            },
+            {
+              items: ["AWS", "COURSERA", "INFOSYS SPRINGBOARD", "NPTEL", "MONGODB"],
+              reverse: true
             }
           ].map((marquee, idx) => (
             <div className="marquee-container" key={idx}>

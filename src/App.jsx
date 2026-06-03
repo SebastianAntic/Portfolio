@@ -576,7 +576,17 @@ function App() {
       </div>
 
       {/* Footer */}
-      <footer className="footer-container" style={{ flexDirection: 'column', gap: '1.5rem', padding: '4rem 1rem' }}>
+      <footer className="footer-container" style={{ 
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: '1.5rem', 
+        padding: '4rem 2vw',
+        width: '100%',
+        boxSizing: 'border-box'
+      }}>
         {/* Social Icons */}
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           {[
@@ -608,6 +618,20 @@ function App() {
               {social.icon}
             </a>
           ))}
+        </div>
+
+        {/* Links */}
+        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <a href="#" style={{ color: mutedColor, textDecoration: 'none', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600, transition: 'color 0.3s ease' }}
+             onMouseOver={(e) => e.target.style.color = hoverColor}
+             onMouseOut={(e) => e.target.style.color = mutedColor}>
+            Documentation
+          </a>
+          <a href="#" style={{ color: mutedColor, textDecoration: 'none', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600, transition: 'color 0.3s ease' }}
+             onMouseOver={(e) => e.target.style.color = hoverColor}
+             onMouseOut={(e) => e.target.style.color = mutedColor}>
+            CV
+          </a>
         </div>
       </footer>
     </div>

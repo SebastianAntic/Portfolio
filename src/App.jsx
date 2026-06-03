@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import meImage from './me.jpeg';
 
 const MovingVectorBackground = ({ theme }) => (
   <div style={{
@@ -280,7 +281,7 @@ function App() {
         <section id="about" className="glass-panel">
           <h2 className="section-title" style={{ color: fgColor }}>ME</h2>
           <center>
-            <img src="src/me.jpeg" alt="Profile Image" width="200px" style={{ borderRadius: '50%' }} />
+            <img src={meImage} alt="Profile Image" width="200px" style={{ borderRadius: '50%' }} />
           </center>
           <p className="about-text" style={{ color: fgColor, fontSize: '1.2rem', lineHeight: 1.8, marginBottom: '4rem', maxWidth: '800px', fontWeight: 200 }}>
             I am a highly motivated software developer and technology enthusiast currently pursuing a Bachelor of Computer Applications (BCA) at St. Joseph's University in Bengaluru. With a strong foundation in mobile and web application development, I specialize in building intuitive, efficient, and scalable digital solutions. My technical expertise spans Java, XML, Flutter, and Dart, complemented by practical experience in database management and backend integration using Firebase and MongoDB.<br></br>
